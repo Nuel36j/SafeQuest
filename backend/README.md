@@ -1,6 +1,6 @@
 # SafeQuest API
 
-Anonymous, crowdsourced reports of scam phone numbers, bank accounts and links.
+SafeQuest is the backend for anonymous, crowdsourced reports of scam phone numbers, bank accounts and links.
 Anyone can search an identifier for free. Reporting needs an account, and accounts
 are anonymous: a generated handle and a password, nothing else.
 
@@ -51,6 +51,11 @@ uvicorn backend.main:app --reload
 
 Docs: `http://127.0.0.1:8000/docs`
 
+## Frontend
+
+The SafeQuest web app (Next.js) lives in its own folder and runs on `http://localhost:3000`,
+which is already in `BACKEND_CORS_ORIGINS`. It shows mock data for now and does not call this API yet.
+
 ## First admin
 
 1. `POST /api/v1/auth/register` with `{"password": "..."}`. Save the `handle` in the response.
@@ -68,6 +73,7 @@ scam types and the most recent report date. Never report text or reporters.
 **Report** `POST /api/v1/reports` (login required)
 One report per user per identifier. Reports from users below `AUTO_APPROVE_MIN_REPUTATION`
 wait in the admin queue. Admin approvals raise the reporter's reputation, rejections lower it.
+`reputation_score` is the user's trust score and is returned by `GET /users/me`.
 
 **Scoring** (`core/scoring.py`)
 Each approved report weighs 0.25 (new account) up to 1.0 (reputation 10+), and halves every
