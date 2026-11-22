@@ -1,4 +1,4 @@
-# Scam Checker API
+# SafeQuest API
 
 Anonymous, crowdsourced reports of scam phone numbers, bank accounts and links.
 Anyone can search an identifier for free. Reporting needs an account, and accounts
