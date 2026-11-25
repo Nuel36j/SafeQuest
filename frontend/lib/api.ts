@@ -2,17 +2,19 @@ import { useAuthStore } from "@/store/authStore";
 import type {
   AdminReport,
   AuditLog,
+  FeedPost,
   IdentifierType,
   Report,
   ReportCreate,
   ReportStatus,
+  ScamType,
   SearchResult,
   Token,
   User,
 } from "@/types/api";
 
 // Where the backend runs. Override with NEXT_PUBLIC_API_URL in .env.local if it moves.
-const API_URL = process.env.NEXT_PUBLIC_API_URL ?? "http://127.0.0.1:8000/api/v1";
+const API_URL = process.env.NEXT_PUBLIC_API_URL ?? "https://safequest-api.onrender.com";
 
 export class ApiError extends Error {
   status: number;
@@ -128,16 +130,6 @@ export function listAuditLogs(skip = 0, limit = 50) {
   return request<AuditLog[]>(`/admin/audit-logs?${params.toString()}`);
 }
 
-
-export interface FeedPost {
-  id: number;
-  identifier_type: IdentifierType;
-  identifier_value: string;
-  scam_type: ScamType;
-  reporter: string; // the reporter's username
-  risk_level: "unknown" | "caution" | "high_risk";
-  created_at: string | null;
-}
 
 export function listFeed(
   skip = 0,
