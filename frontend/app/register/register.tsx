@@ -68,7 +68,7 @@ export default function RegisterPage() {
 
   if (createdUsername) {
     return (
-      <AuthCard title="Account created" subtitle="This is your username. Save it now.">
+      <AuthCard title="Account created">
         <p className="break-all rounded-2xl bg-indigo-50 px-4 py-4 text-center text-2xl font-bold text-indigo-700 dark:bg-indigo-500/10 dark:text-indigo-300">
           {createdUsername}
         </p>
@@ -89,7 +89,7 @@ export default function RegisterPage() {
   }
 
   return (
-    <AuthCard title="Create an account" subtitle="No email or phone number. We generate your username for you.">
+    <AuthCard title="Create an account" subtitle="Do not use a name that identifies you. Anonymity is important.">
       <form onSubmit={handleSubmit} className="space-y-4">
         <div>
           <label htmlFor="username" className={labelClass}>
