@@ -11,6 +11,7 @@ from models.identifier import Identifier
 from models.report import Report, ReportStatus
 from models.user import ROLE_ADMIN, User
 from schemas.report import ReportCreate
+from models.identifier import Identifier, IdentifierType
 
 # Reputation moves only when an admin changes a report's status. Auto-approved reports
 # earn nothing, otherwise a trusted user could farm reputation without anyone checking.
@@ -57,11 +58,18 @@ def create_report(db: Session, user: User, identifier: Identifier, report_in: Re
 
 
 def list_reports(
-    db: Session, status: Optional[ReportStatus] = None, skip: int = 0, limit: int = 50
+    db: Session, status: Optional[ReportStatus] = None, skip: int = 0, limit: int = 50,
+    newest_first: bool = False, identifier_type: Optional[IdentifierType] = None,
 ) -> List[Report]:
     query = db.query(Report).options(joinedload(Report.identifier), joinedload(Report.user))
     if status is not None:
         query = query.filter(Report.status == status)
+    if identifier_type is not None:
+        query = query.join(Identifier, Report.identifier_id == Identifier.id).filter(
+            Identifier.type == identifier_type
+        )
+    if newest_first:
+        return query.order_by(Report.created_at.desc(), Report.id.desc()).offset(skip).limit(limit).all()
     return query.order_by(Report.created_at.asc(), Report.id.asc()).offset(skip).limit(limit).all()
 
 

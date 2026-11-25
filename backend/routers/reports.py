@@ -1,6 +1,7 @@
-from fastapi import APIRouter, Depends, HTTPException, status
+from fastapi import APIRouter, Depends, HTTPException, status, Query
 from sqlalchemy.exc import IntegrityError
 from sqlalchemy.orm import Session
+from typing import List
 
 from core.database import get_db
 from core.normalizer import normalize_identifier
@@ -9,10 +10,38 @@ from core.rate_limit import rate_limit
 from crud import identifier as identifier_crud
 from crud import report as report_crud
 from models.user import User
-from schemas.report import ReportCreate, ReportResponse
+from schemas.report import ReportCreate, ReportResponse, ReportListItem, ReportReview, AdminReportResponse
+from models.report import ReportStatus
+from models.identifier import IdentifierType
 
 router = APIRouter(prefix="/reports", tags=["reports"])
 
+@router.get(
+    "",
+    response_model=List[ReportListItem],
+    dependencies=[Depends(rate_limit(60, 60, "feed"))],
+)
+def read_reports(
+    skip: int = Query(default=0, ge=0),
+    limit: int = Query(default=20, ge=1, le=50),
+    db: Session = Depends(get_db),
+    identifier_type: Optional[IdentifierType] = None,
+    newest_first: bool = True,
+):
+    """Public list of approved reports for the Home feed."""
+    reports = report_crud.list_reports(db, status=ReportStatus.approved, skip=skip, limit=limit, newest_first=newest_first, identifier_type=identifier_type,)
+    return [
+        ReportListItem(
+            id=r.id,
+            identifier_type=r.identifier.type,
+            identifier_value=r.identifier.value_normalized,
+            scam_type=r.scam_type,
+            reporter=r.user.handle,
+            created_at=r.created_at,
+            risk_level=r.identifier.risk_level
+        )
+        for r in reports
+    ]
 
 @router.post(
     "",

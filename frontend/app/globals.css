@@ -1,0 +1,6 @@
+@import "tailwindcss";
+
+/* Tailwind v4: make dark: styles follow the "dark" class on <html> (set by ThemeProvider)
+   instead of the operating system setting. */
+@custom-variant dark (&:where(.dark, .dark *));
+

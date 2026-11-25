@@ -3,7 +3,7 @@ from typing import Optional
 
 from pydantic import BaseModel, ConfigDict, Field
 
-from models.identifier import IdentifierType
+from models.identifier import IdentifierType, RiskLevel
 from models.report import ReportStatus, ScamType
 
 
@@ -22,6 +22,16 @@ class ReportResponse(BaseModel):
     identifier_id: int
     scam_type: ScamType
     status: ReportStatus
+    created_at: Optional[datetime] = None
+
+
+class ReportListItem(BaseModel):
+    id: int
+    identifier_type: IdentifierType
+    identifier_value: str
+    scam_type: ScamType
+    reporter: str
+    risk_level: RiskLevel
     created_at: Optional[datetime] = None
 
 
