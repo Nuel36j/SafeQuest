@@ -13,13 +13,13 @@ export default function HomePage() {
       <Sidebar />
       <div className="flex min-w-0 flex-1 flex-col">
         <Topbar />
-        <main className="grid gap-6 p-4 pb-24 sm:p-6 sm:pb-24 lg:pb-6 xl:grid-cols-[minmax(0,1fr)_340px]">
-          <div className="space-y-6">
+        <main className="grid grid-cols-[minmax(0,1fr)] gap-6 p-4 pb-24 sm:p-6 sm:pb-24 lg:pb-6 xl:grid-cols-[minmax(0,1fr)_340px]">
+          <div className="min-w-0 space-y-6">
             <HeroBanner />
             <CheckCard />
             <LiveFeed />
           </div>
-          <aside className="space-y-6">
+          <aside className="min-w-0 space-y-6">
             <TrustScoreCard />
             <TrendingScamTypes />
             <ReportCta />
