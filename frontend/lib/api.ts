@@ -2,10 +2,12 @@ import { useAuthStore } from "@/store/authStore";
 import type {
   AdminReport,
   AuditLog,
+  FeedPost,
   IdentifierType,
   Report,
   ReportCreate,
   ReportStatus,
+  ScamType,
   SearchResult,
   Token,
   User,
