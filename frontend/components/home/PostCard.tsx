@@ -69,15 +69,9 @@ export default function PostCard({ post, tone }: { post: Post; tone: number }) {
         {attachment ? <div className="mt-3 sm:hidden">{attachment}</div> : null}
 
         <div className="mt-3 flex flex-wrap items-center gap-x-3 gap-y-1 sm:gap-x-5">
-          <Action label="Likes" count={post.likes}>
-            <HeartIcon className="h-5 w-5" />
-          </Action>
-          <Action label="Comments" count={post.comments}>
-            <CommentIcon className="h-5 w-5" />
-          </Action>
-          <Action label="Reposts" count={post.reposts}>
-            <RepeatIcon className="h-5 w-5" />
-          </Action>
+         <Action label="Likes" count={post.likes ?? 0}>
+         <Action label="Comments" count={post.comments ?? 0}>
+         <Action label="Reposts" count={post.reposts ?? 0}>
           <button
             type="button"
             aria-label="More options"
