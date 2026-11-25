@@ -131,16 +131,6 @@ export function listAuditLogs(skip = 0, limit = 50) {
 }
 
 
-export interface FeedPost {
-  id: number;
-  identifier_type: IdentifierType;
-  identifier_value: string;
-  scam_type: ScamType;
-  reporter: string; // the reporter's username
-  risk_level: "unknown" | "caution" | "high_risk";
-  created_at: string | null;
-}
-
 export function listFeed(
   skip = 0,
   limit = 20,
