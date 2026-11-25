@@ -1,7 +1,7 @@
 from fastapi import APIRouter, Depends, HTTPException, status, Query
 from sqlalchemy.exc import IntegrityError
 from sqlalchemy.orm import Session
-from typing import List
+from typing import List, Optional
 
 from core.database import get_db
 from core.normalizer import normalize_identifier
