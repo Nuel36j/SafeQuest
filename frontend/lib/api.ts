@@ -14,7 +14,7 @@ import type {
 } from "@/types/api";
 
 // Where the backend runs. Override with NEXT_PUBLIC_API_URL in .env.local if it moves.
-const API_URL = process.env.NEXT_PUBLIC_API_URL ?? "https://safequest-api.onrender.com";
+const API_URL = process.env.NEXT_PUBLIC_API_URL ?? "https://safequest-api.onrender.com/api/v1";
 
 export class ApiError extends Error {
   status: number;
