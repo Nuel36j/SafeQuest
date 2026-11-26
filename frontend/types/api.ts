@@ -81,8 +81,5 @@ export interface FeedPost {
   reporter: string; // the reporter's username
   risk_level: "unknown" | "caution" | "high_risk";
   created_at: string | null;
-<<<<<<< HEAD
 }
-=======
-}
->>>>>>> 82bed6cb5d3486d2c1f960122ccb25dccbc3570f
+
