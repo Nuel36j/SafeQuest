@@ -89,7 +89,7 @@ export default function RegisterPage() {
   }
 
   return (
-    <AuthCard title="Create an account" subtitle="No email or phone number. We generate your username for you.">
+    <AuthCard title="Create an account" subtitle="Do not use a name that identifies you. Anonymity is important.">
       <form onSubmit={handleSubmit} className="space-y-4">
         <div>
           <label htmlFor="username" className={labelClass}>

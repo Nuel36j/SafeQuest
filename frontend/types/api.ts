@@ -73,7 +73,12 @@ export interface AuditLog {
   created_at: string | null;
 }
 
-export function listFeed(skip = 0, limit = 20) {
-  const params = new URLSearchParams({ skip: String(skip), limit: String(limit) });
-  return request<FeedPost[]>(`/reports?${params.toString()}`, {}, false);
+export interface FeedPost {
+  id: number;
+  identifier_type: IdentifierType;
+  identifier_value: string;
+  scam_type: ScamType;
+  reporter: string; // the reporter's username
+  risk_level: "unknown" | "caution" | "high_risk";
+  created_at: string | null;
 }

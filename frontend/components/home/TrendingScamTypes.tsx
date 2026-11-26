@@ -6,7 +6,11 @@ import type { ScamTypeStat } from "@/types";
 const DOTS = ["bg-red-500", "bg-blue-500", "bg-emerald-500", "bg-orange-500"];
 const BARS = ["bg-indigo-400", "bg-sky-300", "bg-teal-300", "bg-amber-400"];
 
-export default function TrendingScamTypes({ stats }: { stats: ScamTypeStat[] }) {
+type Props = {
+  stats?: ScamTypeStat[];
+};
+
+export default function TrendingScamTypes({ stats = [] }: Props) {
   return (
     <section className="rounded-3xl border border-slate-200 bg-white p-6 dark:border-slate-800 dark:bg-slate-900">
       <div className="flex items-center justify-between">
@@ -22,7 +26,7 @@ export default function TrendingScamTypes({ stats }: { stats: ScamTypeStat[] }) 
       </div>
 
       <ul className="mt-5 space-y-4">
-        {(stats??[]).map((stat, index) => (
+        {stats.map((stat, index) => (
           <li key={stat.label}>
             <div className="flex items-center gap-3">
               <span className={`h-2.5 w-2.5 shrink-0 rounded-full ${DOTS[index % DOTS.length]}`} />
