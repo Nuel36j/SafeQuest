@@ -1,7 +1,7 @@
 from fastapi import APIRouter, Depends, HTTPException, status, Query
 from sqlalchemy.exc import IntegrityError
 from sqlalchemy.orm import Session
-from typing import List
+from typing import List, Optional
 
 from core.database import get_db
 from core.normalizer import normalize_identifier
@@ -25,7 +25,7 @@ def read_reports(
     skip: int = Query(default=0, ge=0),
     limit: int = Query(default=20, ge=1, le=50),
     db: Session = Depends(get_db),
-    identifier_type: Optional[IdentifierType] = Query(None, alias="identifier_type"),
+    identifier_type: Optional[IdentifierType] = Query(None),
     newest_first: bool = True,
 ):
     """Public list of approved reports for the Home feed."""
