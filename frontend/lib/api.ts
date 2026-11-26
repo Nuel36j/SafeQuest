@@ -14,7 +14,11 @@ import type {
 } from "@/types/api";
 
 // Where the backend runs. Override with NEXT_PUBLIC_API_URL in .env.local if it moves.
+<<<<<<< HEAD
 const API_URL = process.env.NEXT_PUBLIC_API_URL ?? "https://safequest-api.onrender.com";
+=======
+const API_URL = process.env.NEXT_PUBLIC_API_URL ?? "https://safequest-api.onrender.com/api/v1";
+>>>>>>> 82bed6cb5d3486d2c1f960122ccb25dccbc3570f
 
 export class ApiError extends Error {
   status: number;
@@ -54,7 +58,11 @@ async function request<T>(path: string, init: RequestInit = {}, auth = true): Pr
   try {
     response = await fetch(`${API_URL}${path}`, { ...init, headers });
   } catch {
+<<<<<<< HEAD
     throw new ApiError(0, "Can't reach server. Try again later.");
+=======
+    throw new ApiError(0, "Can't reach the server. Try again later!");
+>>>>>>> 82bed6cb5d3486d2c1f960122ccb25dccbc3570f
   }
 
   if (!response.ok) {

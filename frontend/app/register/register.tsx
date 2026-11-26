@@ -68,7 +68,7 @@ export default function RegisterPage() {
 
   if (createdUsername) {
     return (
-      <AuthCard title="Account created" subtitle="This is your username. Save it now.">
+      <AuthCard title="Account created">
         <p className="break-all rounded-2xl bg-indigo-50 px-4 py-4 text-center text-2xl font-bold text-indigo-700 dark:bg-indigo-500/10 dark:text-indigo-300">
           {createdUsername}
         </p>
