@@ -54,7 +54,7 @@ async function request<T>(path: string, init: RequestInit = {}, auth = true): Pr
   try {
     response = await fetch(`${API_URL}${path}`, { ...init, headers });
   } catch {
-    throw new ApiError(0, "Can't reach the server. Is the backend running?");
+    throw new ApiError(0, "Can't reach the server. Try again later!");
   }
 
   if (!response.ok) {
